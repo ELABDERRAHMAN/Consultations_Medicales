@@ -1,0 +1,44 @@
+
+
+
+POST  http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+
+    "email" : "adminadmin@clinic.com" ,
+    "password": "adminadmin@clinic.com"
+
+}
+
+
+
+
+POST  http://127.0.0.1:8000/api/register
+Content-Type: application/json
+
+{
+
+    "nom" : "abderrahman" ,
+    "prenom" : "abdo" ,
+    "email" : "el ouassifi abderrahman" ,
+    "password": "12345678"
+
+}
+
+
+
+
+
+
+
+
+
+# curl -X POST http://127.0.0.1:8000/api/register \
+#     -H "Content-Type: application/json" \
+#     -d '{
+#           "nom": "Afraoui",
+#           "prenom": "Mohammed",
+#           "email": "aouad.mohammed@example.com",
+#           "password": "12345678"
+#         }'
