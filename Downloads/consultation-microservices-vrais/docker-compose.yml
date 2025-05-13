@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "4000:4000"
+    networks:
+      - consultation-net
+
+  medecin-service:
+    build: ./medecin-service
+    ports:
+      - "4001:4001"
+    networks:
+      - consultation-net
+
+  patient-service:
+    build: ./patient-service
+    ports:
+      - "4002:4002"
+    networks:
+      - consultation-net
+
+  consultation-service:
+    build: ./consultation-service
+    ports:
+      - "4003:4003"
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq
+    networks:
+      - consultation-net
+    depends_on:
+      - rabbitmq
+
+  notification-service:
+    build: ./notification-service
+    networks:
+      - consultation-net
+    depends_on:
+      - rabbitmq
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    networks:
+      - consultation-net
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - consultation-net
+
+networks:
+  consultation-net:
